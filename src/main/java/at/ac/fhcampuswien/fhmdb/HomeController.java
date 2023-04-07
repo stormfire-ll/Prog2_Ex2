@@ -145,6 +145,20 @@ public class HomeController implements Initializable {
                 .count();
         return result;
     }
+
+
+    public int getLongestMovieTitle(List<Movie> movies) {
+        if (movies == null || movies.isEmpty()) {
+            return 0;
+        }
+
+        return movies.stream()
+                .mapToInt(movie -> movie.getTitle().length())
+                .max()
+                .orElse(0);
+    }
+
+
     /*
     public int getLongestMovieTitle(){
         var movieList = MovieAPI.getAllMovies();
