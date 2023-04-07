@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import static at.ac.fhcampuswien.fhmdb.api.MovieAPI.getAllMovies;
+
 public class HomeController implements Initializable {
     @FXML
     public JFXButton searchBtn;
@@ -50,7 +52,7 @@ public class HomeController implements Initializable {
     }
 
     public void initializeState() {
-        allMovies = MovieAPI.getAllMovies();        // allMovies = Movie.initializeMovies();
+        allMovies = getAllMovies();        // allMovies = Movie.initializeMovies();
         observableMovies.clear();
         observableMovies.addAll(allMovies); // add all movies to the observable list
         sortedState = SortedState.NONE;
@@ -143,4 +145,11 @@ public class HomeController implements Initializable {
                 .count();
         return result;
     }
+    /*
+    public int getLongestMovieTitle(){
+        var movieList = MovieAPI.getAllMovies();
+        // movieList.stream().collect().filter(movie -> movie.getTitle()); //filter by names
+        return movieList;
+    }
+     */
 }
