@@ -13,10 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MovieAPI {
-    private static final String URL = "http://prog2.fh-compuswien.ac.at/movies";
+    private static final String URL = "http://prog2.fh-campuswien.ac.at/movies";
+    //private static final String URL = "http://localhost:8080/movies";
     private static final String DELIMITER = "&";
 
-    // erstellt geeignete URL, Parameter in URL setzen
+    // generates URL, set parameter of URL
     private static String buildUrl(String query, Genre genre, String releaseYear, String ratingFrom){
         StringBuilder url = new StringBuilder(URL);
         if((query != null && !query.isEmpty()) || genre != null || releaseYear != null || ratingFrom != null){
@@ -36,7 +37,7 @@ public class MovieAPI {
         }
         return url.toString();
     }
-
+    // Request: get all Movies from API
     public static List<Movie> getAllMovies() {
         return getAllMovies(null, null, null, null);
     }

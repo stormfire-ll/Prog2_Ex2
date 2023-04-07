@@ -72,8 +72,13 @@ public class Movie {
     public List<String> getMainCast() { return mainCast; }
     public double getRating() { return rating; }
 
-
+    /*
+    nimmt neue Liste entgegen:
     public static List<Movie> initializeMovies(){
+        GSON -> ArrayListe
+     */
+
+    public static List<Movie> initializeMovies(){       //alte statisch Liste
         List<Movie> movies = new ArrayList<>();
         movies.add(new Movie(
                 "Life Is Beautiful",
@@ -98,4 +103,5 @@ public class Movie {
 
         return movies;
     }
+
 }
