@@ -137,4 +137,10 @@ public class HomeController implements Initializable {
     public void sortBtnClicked(ActionEvent actionEvent) {
         sortMovies();
     }
+    public long countMoviesFrom(List<Movie> movies, String director) {
+        var result = movies.stream()
+                .filter(movie -> movie.getDirectors().contains(director))
+                .count();
+        return result;
+    }
 }
