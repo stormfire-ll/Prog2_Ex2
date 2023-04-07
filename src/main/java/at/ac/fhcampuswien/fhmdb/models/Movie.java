@@ -63,15 +63,6 @@ public class Movie {
     public List<Genre> getGenres() {
         return genres;
     }
-    public String getId() { return id; }
-    public int getReleaseYear() { return releaseYear; }
-    public String getImgUrl() { return imgUrl; }
-    public int getLengthInMinutes() { return lengthInMinutes; }
-    public List<String> getDirectors() { return directors; }
-    public List<String> getWriters() { return writers; }
-    public List<String> getMainCast() { return mainCast; }
-    public double getRating() { return rating; }
-
 
     public static List<Movie> initializeMovies(){
         List<Movie> movies = new ArrayList<>();
@@ -98,4 +89,12 @@ public class Movie {
 
         return movies;
     }
+    public String getId() { return id; }
+    public int getReleaseYear() { return releaseYear; }
+    public String getImgUrl() { return imgUrl; }
+    public int getLengthInMinutes() { return lengthInMinutes; }
+    public List<String> getDirectors() { return directors; }
+    public List<String> getWriters() { return writers; }
+    public List<String> getMainCast() { return mainCast; }
+    public double getRating() { return rating; }
 }
