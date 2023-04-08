@@ -129,6 +129,7 @@ public class HomeController implements Initializable {
         String searchQuery = searchField.getText().trim().toLowerCase();
         Object genre = genreComboBox.getSelectionModel().getSelectedItem();
 
+        //our filter logic
         applyAllFilters(searchQuery, genre);
 
         if(sortedState != SortedState.NONE) {
@@ -165,5 +166,28 @@ public class HomeController implements Initializable {
         // movieList.stream().collect().filter(movie -> movie.getTitle()); //filter by names
         return movieList;
     }
-     */
+    */
+   /* public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
+        if (movies == null || movies.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        return movies.stream()
+                .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+                .collect(Collectors.toList());
+    }
+    public String getMostPopularActor(List<Movie> movies) {
+        if (movies == null || movies.isEmpty()) {
+            return null;
+        }
+
+        return movies.stream()
+                .flatMap(movie -> movie.getMainCast().stream())
+                .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
+    }*/
 }
