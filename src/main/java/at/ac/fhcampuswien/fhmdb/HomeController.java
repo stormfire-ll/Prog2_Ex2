@@ -3,6 +3,7 @@ package at.ac.fhcampuswien.fhmdb;
 import at.ac.fhcampuswien.fhmdb.api.MovieAPI;
 import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
+import at.ac.fhcampuswien.fhmdb.models.ReleaseYear;
 import at.ac.fhcampuswien.fhmdb.models.SortedState;
 import at.ac.fhcampuswien.fhmdb.ui.MovieCell;
 import com.jfoenix.controls.JFXButton;
@@ -167,15 +168,15 @@ public class HomeController implements Initializable {
         return movieList;
     }
     */
-   public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
+  public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
         if (movies == null || movies.isEmpty()) {
-            return Collections.emptyList();
+         //   return Collections.emptyList();
         }
 
         return movies.stream()
-                .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
-                .collect(Collectors.toList());
-    }
+         //      .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+         //       .collect(Collectors.toList());
+  }
     public String getMostPopularActor(List<Movie> movies) {
         if (movies == null || movies.isEmpty()) {
             return null;
@@ -190,4 +191,6 @@ public class HomeController implements Initializable {
                 .map(Map.Entry::getKey)
                 .orElse(null);
     }*/
+        return null;
+    }
 }
