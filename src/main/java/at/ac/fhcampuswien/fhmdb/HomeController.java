@@ -17,10 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static at.ac.fhcampuswien.fhmdb.api.MovieAPI.getAllMovies;
 
@@ -170,19 +168,19 @@ public class HomeController implements Initializable {
     */
   public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
         if (movies == null || movies.isEmpty()) {
-         //   return Collections.emptyList();
+            return Collections.emptyList();
         }
 
         return movies.stream()
-         //      .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
-         //       .collect(Collectors.toList());
+             .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+                .collect(Collectors.toList());
   }
     public String getMostPopularActor(List<Movie> movies) {
         if (movies == null || movies.isEmpty()) {
             return null;
         }
 
-        /*return movies.stream()
+        return movies.stream()
                 .flatMap(movie -> movie.getMainCast().stream())
                 .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()))
                 .entrySet()
@@ -190,7 +188,6 @@ public class HomeController implements Initializable {
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse(null);
-    }*/
-        return null;
     }
-}
+
+    }
