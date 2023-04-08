@@ -167,7 +167,7 @@ public class HomeController implements Initializable {
         return movieList;
     }
     */
-   /* public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
+   public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
         if (movies == null || movies.isEmpty()) {
             return Collections.emptyList();
         }
@@ -181,7 +181,7 @@ public class HomeController implements Initializable {
             return null;
         }
 
-        return movies.stream()
+        /*return movies.stream()
                 .flatMap(movie -> movie.getMainCast().stream())
                 .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()))
                 .entrySet()
