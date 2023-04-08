@@ -35,6 +35,13 @@ public class HomeController implements Initializable {
     @FXML
     public JFXComboBox genreComboBox;
 
+    //Ex2: add ReleaseYear & Rating
+    @FXML
+    public JFXComboBox ratingComboBox;
+
+    @FXML
+    public JFXComboBox releaseYearComboBox;
+
     @FXML
     public JFXButton sortBtn;
 
@@ -56,7 +63,7 @@ public class HomeController implements Initializable {
         observableMovies.addAll(allMovies); // add all movies to the observable list
         sortedState = SortedState.NONE;
     }
-
+    //ToDo: Releaseyear ENUMS?
     public void initializeLayout() {
         movieListView.setItems(observableMovies);   // set the items of the listview to the observable list
         movieListView.setCellFactory(movieListView -> new MovieCell()); // apply custom cells to the listview
@@ -65,6 +72,21 @@ public class HomeController implements Initializable {
         genreComboBox.getItems().add("No filter");  // add "no filter" to the combobox
         genreComboBox.getItems().addAll(genres);    // add all genres to the combobox
         genreComboBox.setPromptText("Filter by Genre");
+/*
+
+
+        //releaseYear
+        Object[] releaseYear = Releaseyear.values();   // get all release years
+        releaseYearComboBox.getItems().add("No filter");
+        releaseYearComboBox.getItems().addAll(genres);    // add all release years to the combobox
+        releaseYearComboBox.setPromptText("Filter by Genre");
+
+        //Rating
+        Object[] rating = Rating.values();   // get all ratings
+        ratingComboBox.getItems().add("No filter");
+        ratingComboBox.getItems().addAll(genres);    // add all ratings to the combobox
+        ratingComboBox.setPromptText("Filter by Genre");
+         */
     }
 
     // sort movies based on sortedState
@@ -98,16 +120,23 @@ public class HomeController implements Initializable {
 
     public List<Movie> filterByGenre(List<Movie> movies, Genre genre){
         if(genre == null) return movies;
-
         if(movies == null) {
             throw new IllegalArgumentException("movies must not be null");
         }
-
         return movies.stream()
-                .filter(Objects::nonNull)
+                .filter(Objects::nonNull) // nur Objekte die nicht null sind werden berücksichtigt
                 .filter(movie -> movie.getGenres().contains(genre))
                 .toList();
     }
+    // Ex2 add filter releaseyear & rati
+    // ng
+    /*
+    public List<Movie> filterByReleaseyear(List<Movie> movies) {
+    }
+    public List<Movie> filterByRating() {
+
+    }
+     */
 
     public void applyAllFilters(String searchQuery, Object genre) {
         List<Movie> filteredMovies = allMovies;
@@ -143,8 +172,15 @@ public class HomeController implements Initializable {
         var result = movies.stream()
                 .filter(movie -> movie.getDirectors().contains(director))
                 .count();
+                System.out.println(result);
         return result;
     }
+/*
+
+
+    public int getLongestMovieTitle(List<Movie> movies, String title) {
+    int titlelength = movies.stream().collect().filter(movie -> movie.getTitle()); //filter by names
+    return titlelength;
 
 
     public int getLongestMovieTitle(List<Movie> movies) {
@@ -166,20 +202,19 @@ public class HomeController implements Initializable {
         return movieList;
     }
     */
-  public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
-        if (movies == null || movies.isEmpty()) {
-            return Collections.emptyList();
-        }
+    public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
+            if (movies == null || movies.isEmpty()) {
+                return Collections.emptyList();
+            }
+            return movies.stream()
+                 .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+                    .collect(Collectors.toList());
+    }
 
-        return movies.stream()
-             .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
-                .collect(Collectors.toList());
-  }
     public String getMostPopularActor(List<Movie> movies) {
         if (movies == null || movies.isEmpty()) {
             return null;
         }
-
         return movies.stream()
                 .flatMap(movie -> movie.getMainCast().stream())
                 .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()))
@@ -189,5 +224,4 @@ public class HomeController implements Initializable {
                 .map(Map.Entry::getKey)
                 .orElse(null);
     }
-
-    }
+}
