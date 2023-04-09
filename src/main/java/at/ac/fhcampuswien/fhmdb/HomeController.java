@@ -83,10 +83,10 @@ public class HomeController implements Initializable {
 
 
 
-
-
+        ratingComboBox.getItems().addAll("No filter", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);    // add "no filter" and all ratings to the combobox
         ratingComboBox.setPromptText("Filter by Rating");
-        IntStream.range(0,9).forEach(ratingComboBox.getItems()::add);
+        //ratingComboBox.setPromptText("Filter by Rating");
+        //IntStream.range(0,9).forEach(ratingComboBox.getItems()::add);
 
 
 /*
