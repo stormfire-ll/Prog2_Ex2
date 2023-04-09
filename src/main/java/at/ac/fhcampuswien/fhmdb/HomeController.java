@@ -63,6 +63,7 @@ public class HomeController implements Initializable {
         observableMovies.addAll(allMovies); // add all movies to the observable list
         sortedState = SortedState.NONE;
     }
+
     //ToDo: Releaseyear ENUMS?
     public void initializeLayout() {
         movieListView.setItems(observableMovies);   // set the items of the listview to the observable list
@@ -102,25 +103,25 @@ public class HomeController implements Initializable {
         }
     }
 
-    public List<Movie> filterByQuery(List<Movie> movies, String query){
-        if(query == null || query.isEmpty()) return movies;
+    public List<Movie> filterByQuery(List<Movie> movies, String query) {
+        if (query == null || query.isEmpty()) return movies;
 
-        if(movies == null) {
+        if (movies == null) {
             throw new IllegalArgumentException("movies must not be null");
         }
 
         return movies.stream()
                 .filter(Objects::nonNull)
                 .filter(movie ->
-                    movie.getTitle().toLowerCase().contains(query.toLowerCase()) ||
-                    movie.getDescription().toLowerCase().contains(query.toLowerCase())
+                        movie.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+                                movie.getDescription().toLowerCase().contains(query.toLowerCase())
                 )
                 .toList();
     }
 
-    public List<Movie> filterByGenre(List<Movie> movies, Genre genre){
-        if(genre == null) return movies;
-        if(movies == null) {
+    public List<Movie> filterByGenre(List<Movie> movies, Genre genre) {
+        if (genre == null) return movies;
+        if (movies == null) {
             throw new IllegalArgumentException("movies must not be null");
         }
         return movies.stream()
@@ -148,7 +149,6 @@ public class HomeController implements Initializable {
         if (genre != null && !genre.toString().equals("No filter")) {
             filteredMovies = filterByGenre(filteredMovies, Genre.valueOf(genre.toString()));
         }
-
         observableMovies.clear();
         observableMovies.addAll(filteredMovies);
     }
@@ -160,55 +160,45 @@ public class HomeController implements Initializable {
         //our filter logic
         applyAllFilters(searchQuery, genre);
 
-        if(sortedState != SortedState.NONE) {
+        if (sortedState != SortedState.NONE) {
             sortMovies();
         }
     }
 
     public void sortBtnClicked(ActionEvent actionEvent) {
         sortMovies();
+        // To test stream functions
+        System.out.println(getLongestMovieTitle(allMovies));
+        System.out.println(getMostPopularActor(allMovies));
+        System.out.println(countMoviesFrom(allMovies, "Quentin Tarantino"));
+        System.out.println(getMoviesBetweenYears(allMovies, 2003, 2004));
     }
+
     public long countMoviesFrom(List<Movie> movies, String director) {
         var result = movies.stream()
                 .filter(movie -> movie.getDirectors().contains(director))
                 .count();
-                System.out.println(result);
+        System.out.println(result);
         return result;
     }
-/*
-
-
-    public int getLongestMovieTitle(List<Movie> movies, String title) {
-    int titlelength = movies.stream().collect().filter(movie -> movie.getTitle()); //filter by names
-    return titlelength;
-
 
     public int getLongestMovieTitle(List<Movie> movies) {
         if (movies == null || movies.isEmpty()) {
             return 0;
         }
-
         return movies.stream()
                 .mapToInt(movie -> movie.getTitle().length())
                 .max()
                 .orElse(0);
     }
 
-
-    /*
-    public int getLongestMovieTitle(){
-        var movieList = MovieAPI.getAllMovies();
-        // movieList.stream().collect().filter(movie -> movie.getTitle()); //filter by names
-        return movieList;
-    }
-    */
     public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
-            if (movies == null || movies.isEmpty()) {
-                return Collections.emptyList();
-            }
-            return movies.stream()
-                 .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
-                    .collect(Collectors.toList());
+        if (movies == null || movies.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return movies.stream()
+                .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+                .collect(Collectors.toList());
     }
 
     public String getMostPopularActor(List<Movie> movies) {
