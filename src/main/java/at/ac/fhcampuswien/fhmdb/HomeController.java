@@ -76,6 +76,19 @@ public class HomeController implements Initializable {
         genreComboBox.setPromptText("Filter by Genre");
 
 
+
+
+
+
+
+
+
+
+
+        ratingComboBox.setPromptText("Filter by Rating");
+        IntStream.range(0,9).forEach(ratingComboBox.getItems()::add);
+
+
 /*
 
 
