@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static at.ac.fhcampuswien.fhmdb.api.MovieAPI.getAllMovies;
 
@@ -73,6 +74,8 @@ public class HomeController implements Initializable {
         genreComboBox.getItems().add("No filter");  // add "no filter" to the combobox
         genreComboBox.getItems().addAll(genres);    // add all genres to the combobox
         genreComboBox.setPromptText("Filter by Genre");
+
+
 /*
 
 
@@ -155,19 +158,48 @@ public class HomeController implements Initializable {
     }
 
     public void searchBtnClicked(ActionEvent actionEvent) {
+
         String searchQuery = searchField.getText().trim().toLowerCase();
         Object genre = genreComboBox.getSelectionModel().getSelectedItem();
+        Object releasYear = releaseYearComboBox.getSelectionModel().getSelectedItem();
+        Object rating = ratingComboBox.getSelectionModel().getSelectedItem();
 
+        String genreStr = null;
+        String releaseYearStr = null;
+        String ratingStr = null;
+
+        if (genre != null) {
+            genreStr = genre.toString();
+        }
+        if (releasYear != null) {
+            releasYear = releasYear.toString();
+        }
+        if (rating != null) {
+            ratingStr = rating.toString();
+        }
         //our filter logic
         applyAllFilters(searchQuery, genre);
 
         if(sortedState != SortedState.NONE) {
             sortMovies();
         }
+        else {
+            observableMovies.addAll(allMovies);
+            List<Movie> movies = MovieAPI.getMovies(searchQuery,genreStr, releaseYearStr, ratingStr);
+            observableMovies.clear();
+            observableMovies.addAll(movies);
+
+        }
     }
 
     public void sortBtnClicked(ActionEvent actionEvent) {
         sortMovies();
+        // To test stream functions
+        System.out.println(getLongestMovieTitle(allMovies));
+        System.out.println(getMostPopularActor(allMovies));
+        System.out.println(countMoviesFrom(allMovies, "Quentin Tarantino"));
+        System.out.println(getMoviesBetweenYears(allMovies, 2003, 2004));
+
     }
     public long countMoviesFrom(List<Movie> movies, String director) {
         var result = movies.stream()

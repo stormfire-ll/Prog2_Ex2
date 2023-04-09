@@ -26,10 +26,10 @@ public class MovieAPI {
             if(query != null && !query.isEmpty()){
                 url.append("query=").append(query).append(DELIMITER);
             }
-            if (genre != null){
+            if (genre != null && !genre.equals("No filter")){
                 url.append("genre=").append(genre).append(DELIMITER);
             }
-            if (releaseYear != null) {
+            if (releaseYear != null && !releaseYear.equals("No filter")) {
                 url.append("releaseYear=").append(releaseYear).append(DELIMITER);
             }
             if (ratingFrom != null) {
@@ -61,5 +61,9 @@ public class MovieAPI {
             System.err.println(e.getMessage());
         }
         return new ArrayList<>();
+    }
+
+    public static List<Movie> getMovies(String searchQuery, String genreStr, String releaseYearStr, String ratingStr) {
+        return null;
     }
 }
