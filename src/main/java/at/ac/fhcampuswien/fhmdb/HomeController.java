@@ -145,9 +145,16 @@ public class HomeController implements Initializable {
         Object releaseYear = releaseYearComboBox.getSelectionModel().getSelectedItem();     //Ex1: applyAllFilters(searchQuery, genre);
         Object rating = ratingComboBox.getSelectionModel().getSelectedItem();
 
-        String genreR = genre.toString();
-        String releaseYearR = releaseYear.toString();
-        String ratingR = rating.toString();
+        String genreR = "";
+        String releaseYearR = "";
+        String ratingR = "";
+
+        if (genre != null) { genreR = genre.toString(); }
+        if (releaseYear != null) { releaseYearR = releaseYear.toString(); }
+        if (rating != null) { ratingR = rating.toString(); }
+       // String genreR = genre.toString();
+        //String releaseYearR = releaseYear.toString();
+       // String ratingR = rating.toString();
 
         //allMovies = getRequestedMovies();
         List<Movie> filteredMovies = getAllMovies(searchQuery, genreR, releaseYearR, ratingR);
