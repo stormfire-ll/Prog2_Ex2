@@ -37,5 +37,29 @@ public class MovieAPI {
         }
         return url.toString();
     }
+    public static List<Movie> getAMovies() {
+        return getMovies(null, null, null, null);
+    }
+    // getAllMovies: Request & Response
+    public static List<Movie> getMovies(String query, String genre, String releaseYear, String ratingFrom) {
+        String url = buildUrl(query, genre, releaseYear, ratingFrom);
+        Request request = new Request.Builder()                         // Request
+                .url(url)
+                .removeHeader("User-Agent")
+                .addHeader("User-Agent", "http.agent")      // gesetzter User-Agent Header
+                .build();
+        OkHttpClient client = new OkHttpClient();
+        try (Response response = client.newCall(request).execute()){
+            String responseBody = response.body().string();
+            Gson gson = new Gson();
+            Movie[] movies = gson.fromJson(responseBody, Movie[].class); //parse responses in JSON into Java objects
+            return Arrays.asList(movies);
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return new ArrayList<>();
+    }
+
 
 }
