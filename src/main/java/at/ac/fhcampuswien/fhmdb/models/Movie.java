@@ -1,5 +1,7 @@
 package at.ac.fhcampuswien.fhmdb.models;
 
+import at.ac.fhcampuswien.fhmdb.api.MovieAPI;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -63,6 +65,8 @@ public class Movie {
     public List<Genre> getGenres() {
         return genres;
     }
+
+
 
     public static List<Movie> initializeMovies(){
         List<Movie> movies = new ArrayList<>();
