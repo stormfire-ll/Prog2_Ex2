@@ -60,6 +60,4 @@ public class MovieAPI {
         }
         return new ArrayList<>();
     }
-
-
 }
