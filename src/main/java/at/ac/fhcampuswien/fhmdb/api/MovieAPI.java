@@ -61,26 +61,5 @@ public class MovieAPI {
         return new ArrayList<>();
     }
 
-    public static List<Movie> getRequestedMovies() {
-        return getAllMovies(null, null, null, null);
-    }
-    public static List<Movie> getRequestedMovies(String queryR, String genreR, String releaseYearR, String ratingFromR) {
-        String url = buildUrl(queryR, genreR, releaseYearR, ratingFromR);
-        Request request = new Request.Builder()
-                .url(url)
-                .removeHeader("User-Agent")
-                .addHeader("User-Agent", "http.agent")
-                .build();
-        OkHttpClient client = new OkHttpClient();
-        try (Response response = client.newCall(request).execute()){
-            String responseBody = response.body().string();
-            Gson gson = new Gson();
-            Movie[] filteredMovies = gson.fromJson(responseBody, Movie[].class);
-            return Arrays.asList(filteredMovies);
 
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-        return new ArrayList<>();
-    }
 }

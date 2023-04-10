@@ -59,7 +59,7 @@ public class HomeController implements Initializable {
     }
 
     public void initializeState() {
-        allMovies = getAllMovies();        // allMovies = Movie.initializeMovies();
+        allMovies = getAllMovies();         // Ex.1 allMovies = Movie.initializeMovies();
         observableMovies.clear();
         observableMovies.addAll(allMovies); // add all movies to the observable list
         sortedState = SortedState.NONE;
@@ -100,7 +100,7 @@ public class HomeController implements Initializable {
             sortedState = SortedState.DESCENDING;
         }
     }
-
+    /*
     // Ex1: methods for static list
     public List<Movie> filterByQuery(List<Movie> movies, String query) {
         if (query == null || query.isEmpty()) return movies;
@@ -138,6 +138,7 @@ public class HomeController implements Initializable {
         observableMovies.clear();
         observableMovies.addAll(filteredMovies);
     }
+     */
 
     public void searchBtnClicked(ActionEvent actionEvent) {
         String searchQuery = searchField.getText().trim().toLowerCase();
