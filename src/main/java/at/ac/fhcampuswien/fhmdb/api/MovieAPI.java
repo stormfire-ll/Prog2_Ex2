@@ -37,7 +37,7 @@ public class MovieAPI {
         }
         return url.toString();
     }
-    public static List<Movie> getAMovies() {
+    public static List<Movie> getMovies() {
         return getMovies(null, null, null, null);
     }
     // getAllMovies: Request & Response
@@ -60,4 +60,49 @@ public class MovieAPI {
         }
         return new ArrayList<>();
     }
+    /*
+    // generate movieIdUrl
+    private static String movieIdUrl(String query, String genre, String releaseYear, String ratingFrom){
+        StringBuilder url = new StringBuilder(URL);
+        if((query != null && !query.isEmpty()) || genre != null || releaseYear != null || ratingFrom != null){
+            url.append("?");
+            if(query != null && !query.isEmpty()){
+                url.append("query=").append(query).append(DELIMITER);
+            }
+            if (genre != null && !genre.equals("No filter")){
+                url.append("genre=").append(genre).append(DELIMITER);
+            }
+            if (releaseYear != null && !releaseYear.equals("No filter")) {
+                url.append("releaseYear=").append(releaseYear).append(DELIMITER);
+            }
+            if (ratingFrom != null && !ratingFrom.equals("No filter")) {
+                url.append("ratingFrom=").append(ratingFrom).append(DELIMITER);
+            }
+        }
+        return url.toString();
+    }
+    public static List<Movie> getMovieId() {
+        return getMovies(null, null, null, null);
+    }
+    // getAllMovies: Request & Response
+    public static List<Movie> getMovieId(String query, String genre, String releaseYear, String ratingFrom) {
+        String url = buildUrl(query, genre, releaseYear, ratingFrom);
+        Request request = new Request.Builder()                         // Request
+                .url(url)
+                .removeHeader("User-Agent")
+                .addHeader("User-Agent", "http.agent")      // gesetzter User-Agent Header
+                .build();
+        OkHttpClient client = new OkHttpClient();
+        try (Response response = client.newCall(request).execute()){
+            String responseBody = response.body().string();
+            Gson gson = new Gson();
+            Movie[] movies = gson.fromJson(responseBody, Movie[].class); //parse responses in JSON into Java objects
+            return Arrays.asList(movies);
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return new ArrayList<>();
+    }
+     */
 }
