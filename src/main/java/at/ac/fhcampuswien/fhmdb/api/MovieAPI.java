@@ -37,11 +37,11 @@ public class MovieAPI {
         }
         return url.toString();
     }
-    public static List<Movie> getAMovies() {
-        return getMovies(null, null, null, null);
+    public static List<Movie> getAllMovies() {
+        return getAllMovies(null, null, null, null);
     }
     // getAllMovies: Request & Response
-    public static List<Movie> getMovies(String query, String genre, String releaseYear, String ratingFrom) {
+    public static List<Movie> getAllMovies(String query, String genre, String releaseYear, String ratingFrom) {
         String url = buildUrl(query, genre, releaseYear, ratingFrom);
         Request request = new Request.Builder()                         // Request
                 .url(url)
