@@ -3,7 +3,6 @@ package at.ac.fhcampuswien.fhmdb;
 import at.ac.fhcampuswien.fhmdb.api.MovieAPI;
 import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
-import at.ac.fhcampuswien.fhmdb.models.ReleaseYear;
 import at.ac.fhcampuswien.fhmdb.models.SortedState;
 import at.ac.fhcampuswien.fhmdb.ui.MovieCell;
 import com.jfoenix.controls.JFXButton;
@@ -21,7 +20,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static at.ac.fhcampuswien.fhmdb.api.MovieAPI.getAllMovies;
+import static at.ac.fhcampuswien.fhmdb.api.MovieAPI.getMovies;
 
 public class HomeController implements Initializable {
     @FXML
@@ -59,7 +58,7 @@ public class HomeController implements Initializable {
     }
 
     public void initializeState() {
-        allMovies = getAllMovies();         // Ex.1 allMovies = Movie.initializeMovies();
+        allMovies = MovieAPI.getMovies();         // Ex.1 allMovies = Movie.initializeMovies();
         observableMovies.clear();
         observableMovies.addAll(allMovies); // add all movies to the observable list
         sortedState = SortedState.NONE;
@@ -157,7 +156,7 @@ public class HomeController implements Initializable {
        // String ratingR = rating.toString();
 
         //allMovies = getRequestedMovies();
-        List<Movie> filteredMovies = getAllMovies(searchQuery, genreR, releaseYearR, ratingR);
+        List<Movie> filteredMovies = getMovies(searchQuery, genreR, releaseYearR, ratingR);
         observableMovies.clear();
         observableMovies.addAll(filteredMovies);
 
