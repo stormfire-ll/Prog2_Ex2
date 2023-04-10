@@ -20,27 +20,36 @@ import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
-import static at.ac.fhcampuswien.fhmdb.api.MovieAPI.*;
+import static at.ac.fhcampuswien.fhmdb.api.MovieAPI.getAllMovies;
 
 public class HomeController implements Initializable {
     @FXML
     public JFXButton searchBtn;
+
     @FXML
     public TextField searchField;
+
     @FXML
     public JFXListView movieListView;
+
     @FXML
     public JFXComboBox genreComboBox;
+
+    //Ex2: add ReleaseYear & Rating
     @FXML
     public JFXComboBox ratingComboBox;
+
     @FXML
     public JFXComboBox releaseYearComboBox;
+
     @FXML
     public JFXButton sortBtn;
+
     public List<Movie> allMovies;
+
     protected ObservableList<Movie> observableMovies = FXCollections.observableArrayList();
+
     protected SortedState sortedState;
 
     @Override
@@ -55,6 +64,7 @@ public class HomeController implements Initializable {
         observableMovies.addAll(allMovies); // add all movies to the observable list
         sortedState = SortedState.NONE;
     }
+    //ToDo: Releaseyear ENUMS?
     public void initializeLayout() {
         movieListView.setItems(observableMovies);   // set the items of the listview to the observable list
         movieListView.setCellFactory(movieListView -> new MovieCell()); // apply custom cells to the listview
@@ -139,7 +149,7 @@ public class HomeController implements Initializable {
         String releaseYearR = releaseYear.toString();
         String ratingR = rating.toString();
 
-        allMovies = getRequestedMovies();
+        //allMovies = getRequestedMovies();
         List<Movie> filteredMovies = getAllMovies(searchQuery, genreR, releaseYearR, ratingR);
         observableMovies.clear();
         observableMovies.addAll(filteredMovies);

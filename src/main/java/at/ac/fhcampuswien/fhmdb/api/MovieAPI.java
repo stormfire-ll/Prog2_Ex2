@@ -18,7 +18,7 @@ public class MovieAPI {
     private static final String DELIMITER = "&";
 
     // generate URL for request & set parameter of URL
-    private static String buildUrl(String query, Genre genre, String releaseYear, String ratingFrom){
+    private static String buildUrl(String query, String genre, String releaseYear, String ratingFrom){
         StringBuilder url = new StringBuilder(URL);
         if((query != null && !query.isEmpty()) || genre != null || releaseYear != null || ratingFrom != null){
             url.append("?");
@@ -41,7 +41,7 @@ public class MovieAPI {
         return getAllMovies(null, null, null, null);
     }
     // getAllMovies: Request & Response
-    public static List<Movie> getAllMovies(String query, Genre genre, String releaseYear, String ratingFrom) {
+    public static List<Movie> getAllMovies(String query, String genre, String releaseYear, String ratingFrom) {
         String url = buildUrl(query, genre, releaseYear, ratingFrom);
         Request request = new Request.Builder()                         // Request
                 .url(url)
@@ -64,7 +64,7 @@ public class MovieAPI {
     public static List<Movie> getRequestedMovies() {
         return getAllMovies(null, null, null, null);
     }
-    public static List<Movie> getRequestedMovies(String queryR, Genre genreR, String releaseYearR, String ratingFromR) {
+    public static List<Movie> getRequestedMovies(String queryR, String genreR, String releaseYearR, String ratingFromR) {
         String url = buildUrl(queryR, genreR, releaseYearR, ratingFromR);
         Request request = new Request.Builder()
                 .url(url)
