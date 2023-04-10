@@ -64,7 +64,6 @@ public class HomeController implements Initializable {
         observableMovies.addAll(allMovies); // add all movies to the observable list
         sortedState = SortedState.NONE;
     }
-    //ToDo: Releaseyear ENUMS?
     public void initializeLayout() {
         movieListView.setItems(observableMovies);   // set the items of the listview to the observable list
         movieListView.setCellFactory(movieListView -> new MovieCell()); // apply custom cells to the listview
